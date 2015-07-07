@@ -1,0 +1,16 @@
+#Java compiled code
+*.class
+
+#ressources
+*.txt
+
+#Eclipse files
+.project
+.classpath
+.metadata
+*.jar
+*.zip
+
+#log files
+*.log
+*.csv
