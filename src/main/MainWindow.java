@@ -31,12 +31,12 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private final int examSize = 5;
+	final static int examSize = 5;
 	private int questionsDone = 1;
-	private String[][] gaa = new String[examSize][5]; //given answers array
-	private int[] raa = new int[examSize]; //registered answers array
-	public static float mark;
-	public static MainWindow frame;
+	static String[][] gaa = new String[examSize][5]; //given answers array
+	static int[] raa = new int[examSize]; //registered answers array
+	static float mark;
+	static MainWindow frame;
 	/**
 	 * Launch the application.
 	 */
@@ -133,7 +133,7 @@ public class MainWindow extends JFrame {
 						
 						questionsDone = ++questionsDone;
 					}else{
-						System.out.println(Arrays.toString(raa));
+						//System.out.println(Arrays.toString(raa));
 						for (int i : raa)
 						    mark += i;
 						mark = mark*100/examSize; // exam mark in percents

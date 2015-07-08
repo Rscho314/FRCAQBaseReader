@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -37,7 +39,7 @@ public class ReviewDialog extends JDialog {
 
 	    });
 		
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		setContentPane(panel);
 		//panel.setLayout(new BorderLayout(panel, BorderLayout.CENTER));
 		
@@ -58,7 +60,7 @@ public class ReviewDialog extends JDialog {
 		if(MainWindow.mark >= 0.8){
 			lblRename.setText("<html>You will likely pass a lot of gas until retirement.</html>");
 		}else{
-			lblRename.setText("<html>Keep trying, you type A!</html>");
+			lblRename.setText("<html>Keep trying, you type A! The artificial paradise of anesthetic drugs awaits!</html>");
 		}
 		txtPanel.add(lblRename);
 		
@@ -80,10 +82,29 @@ public class ReviewDialog extends JDialog {
 		JButton btnRestart = new JButton("Start a new session");
 		btnPanel.add(btnRestart, gbc);
 		gbc.gridy++;
+		btnRestart.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ReviewDialog.this.dispatchEvent(new WindowEvent(ReviewDialog.this, WindowEvent.WINDOW_CLOSING));
+				MainWindow.gaa = new String[MainWindow.examSize][5];
+				MainWindow.raa = new int[MainWindow.examSize];
+			}
+			
+		});
 		
 		JButton btnQuit = new JButton("Quit");
 		btnPanel.add(btnQuit, gbc);
 		gbc.gridy++;
+		btnQuit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+				
+			}
+			
+		});
 	}
 
 }
