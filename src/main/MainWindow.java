@@ -6,12 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Random;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 
 
 public class MainWindow extends JFrame {
@@ -44,61 +51,53 @@ public class MainWindow extends JFrame {
 	 * @throws URISyntaxException 
 	 */
 	public MainWindow() throws URISyntaxException, Exception {
+		
+		//Logic
+		Logic L = new Logic();
+		File f = L.ChooseQuestion();
+		String[][] qa = L.ReadQuestion(f);
+		//System.out.println(Arrays.deepToString(qa));
+		
+		//GUI
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblQuestion = new JLabel("<html>"+qa[0][0]+"</html>");
+		lblQuestion.setBorder(new EmptyBorder(10,10,20,0));
+		contentPane.add(lblQuestion, BorderLayout.NORTH);
+		
+		JButton btnValidate = new JButton("validate");
+		contentPane.add(btnValidate, BorderLayout.SOUTH);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		JCheckBox chckbxAns = new JCheckBox(qa[1][1]);
+		chckbxAns.setBorder(new EmptyBorder(0,15,10,0));
+		panel.add(chckbxAns);
+		
+		JCheckBox chckbxAns_1 = new JCheckBox(qa[2][1]);
+		chckbxAns_1.setBorder(new EmptyBorder(0,15,10,0));
+		panel.add(chckbxAns_1);
+		
+		JCheckBox chckbxAns_2 = new JCheckBox(qa[3][1]);
+		chckbxAns_2.setBorder(new EmptyBorder(0,15,10,0));
+		panel.add(chckbxAns_2);
+		
+		JCheckBox chckbxAns_3 = new JCheckBox(qa[4][1]);
+		chckbxAns_3.setBorder(new EmptyBorder(0,15,10,0));
+		panel.add(chckbxAns_3);
+		
+		JCheckBox chckbxAns_4 = new JCheckBox(qa[5][1]);
+		chckbxAns_4.setBorder(new EmptyBorder(0,15,10,0));
+		panel.add(chckbxAns_4);
 
 		this.setTitle("FRCA QBase Reader");
-		String path = MainWindow.class.getResource("\\resource\\").getPath();
-		System.out.println(path);
-		String[] Fl = new File(MainWindow.class.getResource("\\resource\\").toURI()).list();
-		System.out.println(Arrays.toString(Fl));
-		//System.out.println(MainWindow.class.getResource("\\resource\\"+"/"+Fl[1]).getPath());
-		Random random = new Random();
-		int index = random.nextInt(Fl.length);
-		File f = new File(MainWindow.class.getResource("\\resource\\"+"/"+Fl[index]).toURI());
-		//System.out.println(f.exists());
-	    /*
-		BufferedReader br = new BufferedReader(new FileReader(f));
-	    try {
-	        StringBuilder sb = new StringBuilder();
-	        String line = br.readLine();
-
-	        while (line != null) {
-	            sb.append(line);
-	            sb.append(System.lineSeparator());
-	            line = br.readLine();
-	        }
-	        String everything = sb.toString();
-	        System.out.println(everything);
-	    } finally {
-	        br.close();
-	    }
-	    */
-		BufferedReader br = new BufferedReader(new FileReader(f));
-		String[][] sa = new String[6][2];
-		try {
-			String line;
-			for(int i=0; i<6; i++){
-				line = br.readLine();
-				if(line==null){
-					
-				}else if(i==0){
-					sa[i][0] = line;
-					sa[i][1] = null;
-				}else{
-					sa[i][0] = line.split(",")[0];
-					sa[i][1] = line.split(",")[1];				
-				} 
-			}
-		
-		} finally {
-        br.close();
-        System.out.println(Arrays.deepToString(sa));
-		}
 		
 	}
 }
