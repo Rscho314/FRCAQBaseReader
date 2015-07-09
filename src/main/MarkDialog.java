@@ -116,9 +116,9 @@ public class MarkDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				MarkDialog.this.dispatchEvent(new WindowEvent(MarkDialog.this, WindowEvent.WINDOW_CLOSING));
-				MainWindow.gaa = new String[MainWindow.examSize][5];
+				/*MainWindow.gaa = new String[MainWindow.examSize][5];
 				MainWindow.raa = new int[MainWindow.examSize];
-				MainWindow.questionsDone = 0;
+				MainWindow.questionsDone = 0;*/
 			}
 			
 		});

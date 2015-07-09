@@ -33,13 +33,17 @@ public class MainWindow extends JFrame {
 	private JPanel contentPane;
 	final static int examSize = 5;
 	static int questionsDone = 0;
+	static int questionsDoneCopy = 0;
 	static String[][] gaa = new String[examSize][5]; //given answers array
+	static String[][] gaaCopy = new String[examSize][5]; //given answers array
 	static int[] raa = new int[examSize]; //registered answers array
+	static int[] raaCopy = new int[examSize]; //registered answers array
 	static float mark;
 	static MainWindow frame;
 	String[][] qa; //questions array
 	String[] aa; //answers array
 	static String[] aqa = new String[examSize]; //asked questions array
+	static String[] aqaCopy = new String[examSize]; //asked questions array
 	/**
 	 * Launch the application.
 	 */
@@ -127,6 +131,7 @@ public class MainWindow extends JFrame {
 						if(gaa[questionsDone] == aa){raa[questionsDone] = 1;}else{raa[questionsDone] = 0;}
 						questionsDone = ++questionsDone;
 						if(questionsDone < examSize){
+							if(questionsDone == examSize-1){btnValidate.setText("Finish session");}
 							f = L.ChooseQuestion();
 							qa = Logic.ReadQuestion(f);
 							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
@@ -147,6 +152,26 @@ public class MainWindow extends JFrame {
 							MainWindow.this.setVisible(false); //hide the questions window
 							MarkDialog md = new MarkDialog();
 							md.setVisible(true);
+							
+							gaaCopy = gaa;
+							raaCopy = raa;
+							questionsDoneCopy = questionsDone;
+							aqaCopy = aqa;
+							
+							gaa = new String[MainWindow.examSize][5];
+							raa = new int[MainWindow.examSize];
+							aqa = new String[examSize]; //asked questions array
+							questionsDone = 0;
+							f = L.ChooseQuestion();
+							qa = Logic.ReadQuestion(f);
+							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
+						
+							lblQuestion.setText("<html>"+qa[0][0]+"</html>");
+							chckbxAns.setText("<html>"+qa[1][1]+"</html>");
+							chckbxAns_1.setText("<html>"+qa[2][1]+"</html>");
+							chckbxAns_2.setText("<html>"+qa[3][1]+"</html>");
+							chckbxAns_3.setText("<html>"+qa[4][1]+"</html>");
+							chckbxAns_4.setText("<html>"+qa[5][1]+"</html>");
 						}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
