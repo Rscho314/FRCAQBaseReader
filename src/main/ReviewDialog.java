@@ -57,12 +57,12 @@ public class ReviewDialog extends JDialog {
 			errorpaths.add(MainWindow.aqaCopy[i]);
 		}
 		String[][] rq = FindReviewedQuestion();
-		/*System.out.println(Arrays.toString(errorIndices.toArray()));
+		System.out.println(Arrays.toString(errorIndices.toArray()));
 		System.out.println(Arrays.toString(errorpaths.toArray()));
-		System.out.println(Arrays.toString(MainWindow.aqa));
+		System.out.println(Arrays.toString(MainWindow.aqaCopy));
 		System.out.println(Arrays.toString(MainWindow.raaCopy));
 		System.out.println(Arrays.deepToString(MainWindow.gaaCopy));
-		System.out.println(Arrays.deepToString(rq));*/
+		System.out.println(Arrays.deepToString(rq));
 		
 		
 		JPanel contentPane = new JPanel();
@@ -85,24 +85,74 @@ public class ReviewDialog extends JDialog {
 		lblQuestion.setBorder(new EmptyBorder(0,10,20,0));
 		panel.add(lblQuestion);
 		
-		final JCheckBox chckbxAns = new JCheckBox("<html>"+rq[1][1]+"</html>");
+		final JCheckBox chckbxAns = new JCheckBox();
 		chckbxAns.setBorder(new EmptyBorder(0,15,10,0));
+		if(MainWindow.gaaCopy[0][0]=="true"){
+			chckbxAns.setSelected(true);
+		}else{
+			chckbxAns.setSelected(false);
+		}
+		if(MainWindow.gaaCopy[0][0]==rq[1][0]){
+			chckbxAns.setText("<html><font color='green'>"+rq[1][1]+"</font></html>");
+		}else{
+			chckbxAns.setText("<html><font color='red'>"+rq[1][1]+"</font></html>");
+		}
 		panel.add(chckbxAns);
 		
-		final JCheckBox chckbxAns_1 = new JCheckBox("<html>"+rq[2][1]+"</html>");
+		final JCheckBox chckbxAns_1 = new JCheckBox();
 		chckbxAns_1.setBorder(new EmptyBorder(0,15,10,0));
+		if(MainWindow.gaaCopy[0][1]=="true"){
+			chckbxAns_1.setSelected(true);
+		}else{
+			chckbxAns_1.setSelected(false);
+		}
+		if(MainWindow.gaaCopy[0][1]==rq[2][0]){
+			chckbxAns_1.setText("<html><font color='green'>"+rq[2][1]+"</font></html>");
+		}else{
+			chckbxAns_1.setText("<html><font color='red'>"+rq[2][1]+"</font></html>");
+		}
 		panel.add(chckbxAns_1);
 		
-		final JCheckBox chckbxAns_2 = new JCheckBox("<html>"+rq[3][1]+"</html>");
+		final JCheckBox chckbxAns_2 = new JCheckBox();
 		chckbxAns_2.setBorder(new EmptyBorder(0,15,10,0));
+		if(MainWindow.gaaCopy[0][2]=="true"){
+			chckbxAns_2.setSelected(true);
+		}else{
+			chckbxAns_2.setSelected(false);
+		}
+		if(MainWindow.gaaCopy[0][2]==rq[3][0]){
+			chckbxAns_2.setText("<html><font color='green'>"+rq[3][1]+"</font></html>");
+		}else{
+			chckbxAns_2.setText("<html><font color='red'>"+rq[3][1]+"</font></html>");
+		}
 		panel.add(chckbxAns_2);
 		
-		final JCheckBox chckbxAns_3 = new JCheckBox("<html>"+rq[4][1]+"</html>");
+		final JCheckBox chckbxAns_3 = new JCheckBox();
 		chckbxAns_3.setBorder(new EmptyBorder(0,15,10,0));
+		if(MainWindow.gaaCopy[0][3]=="true"){
+			chckbxAns_3.setSelected(true);
+		}else{
+			chckbxAns_3.setSelected(false);
+		}
+		if(MainWindow.gaaCopy[0][3]==rq[4][0]){
+			chckbxAns_3.setText("<html><font color='green'>"+rq[4][1]+"</font></html>");
+		}else{
+			chckbxAns_3.setText("<html><font color='red'>"+rq[4][1]+"</font></html>");
+		}
 		panel.add(chckbxAns_3);
 		
-		final JCheckBox chckbxAns_4 = new JCheckBox("<html>"+rq[5][1]+"</html>");
+		final JCheckBox chckbxAns_4 = new JCheckBox();
 		chckbxAns_4.setBorder(new EmptyBorder(0,15,20,0));
+		if(MainWindow.gaaCopy[0][4]=="true"){
+			chckbxAns_4.setSelected(true);
+		}else{
+			chckbxAns_4.setSelected(false);
+		}
+		if(MainWindow.gaaCopy[0][4]==rq[5][0]){
+			chckbxAns_4.setText("<html><font color='green'>"+rq[5][1]+"</font></html>");
+		}else{
+			chckbxAns_4.setText("<html><font color='red'>"+rq[5][1]+"</font></html>");
+		}
 		panel.add(chckbxAns_4);
 		
 		final JLabel lblExplanation = new JLabel("<html>"+rq[6][0]+"</html>");
@@ -122,11 +172,63 @@ public class ReviewDialog extends JDialog {
 						}
 						String[][] rq = FindReviewedQuestion();
 						lblQuestion.setText("<html>"+rq[0][0]+"</html>");
+						
 						chckbxAns.setText("<html>"+rq[1][1]+"</html>");
 						chckbxAns_1.setText("<html>"+rq[2][1]+"</html>");
 						chckbxAns_2.setText("<html>"+rq[3][1]+"</html>");
 						chckbxAns_3.setText("<html>"+rq[4][1]+"</html>");
 						chckbxAns_4.setText("<html>"+rq[5][1]+"</html>");
+						
+						if(MainWindow.gaaCopy[0][0]=="true"){
+							chckbxAns.setSelected(true);
+						}else{
+							chckbxAns.setSelected(false);
+						}
+						if(MainWindow.gaaCopy[0][0]==rq[1][0]){
+							chckbxAns.setText("<html><font color='green'>"+rq[1][1]+"</font></html>");
+						}else{
+							chckbxAns.setText("<html><font color='red'>"+rq[1][1]+"</font></html>");
+						}
+						if(MainWindow.gaaCopy[0][1]=="true"){
+							chckbxAns_1.setSelected(true);
+						}else{
+							chckbxAns_1.setSelected(false);
+						}
+						if(MainWindow.gaaCopy[0][1]==rq[2][0]){
+							chckbxAns_1.setText("<html><font color='green'>"+rq[2][1]+"</font></html>");
+						}else{
+							chckbxAns_1.setText("<html><font color='red'>"+rq[2][1]+"</font></html>");
+						}
+						if(MainWindow.gaaCopy[0][2]=="true"){
+							chckbxAns_2.setSelected(true);
+						}else{
+							chckbxAns_2.setSelected(false);
+						}
+						if(MainWindow.gaaCopy[0][2]==rq[3][0]){
+							chckbxAns_2.setText("<html><font color='green'>"+rq[3][1]+"</font></html>");
+						}else{
+							chckbxAns_2.setText("<html><font color='red'>"+rq[3][1]+"</font></html>");
+						}
+						if(MainWindow.gaaCopy[0][3]=="true"){
+							chckbxAns_3.setSelected(true);
+						}else{
+							chckbxAns_3.setSelected(false);
+						}
+						if(MainWindow.gaaCopy[0][3]==rq[4][0]){
+							chckbxAns_3.setText("<html><font color='green'>"+rq[4][1]+"</font></html>");
+						}else{
+							chckbxAns_3.setText("<html><font color='red'>"+rq[4][1]+"</font></html>");
+						}
+						if(MainWindow.gaaCopy[0][4]=="true"){
+							chckbxAns_4.setSelected(true);
+						}else{
+							chckbxAns_4.setSelected(false);
+						}
+						if(MainWindow.gaaCopy[0][4]==rq[5][0]){
+							chckbxAns_4.setText("<html><font color='green'>"+rq[5][1]+"</font></html>");
+						}else{
+							chckbxAns_4.setText("<html><font color='red'>"+rq[5][1]+"</font></html>");
+						}
 						lblExplanation.setText("<html>"+rq[6][0]+"</html>");
 					}else{
 						ReviewDialog.this.dispatchEvent(new WindowEvent(ReviewDialog.this, WindowEvent.WINDOW_CLOSING));
