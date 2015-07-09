@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -13,12 +15,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class ReviewDialog extends JDialog {
@@ -31,7 +36,7 @@ public class ReviewDialog extends JDialog {
 	int reviewed = 0;
 	
 	public ReviewDialog() throws URISyntaxException, IOException{
-		setBounds(100, 100, 500, 350);
+		setBounds(100, 100, 500, 650);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter() {
@@ -69,8 +74,15 @@ public class ReviewDialog extends JDialog {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
+		final JLabel lblLegend = new JLabel("<html>You answered:</html>");
+		lblLegend.setBorder(new EmptyBorder(10,10,20,0));
+		panel.add(lblLegend);
+		
+		/*final JSeparator sep = new JSeparator(SwingConstants.HORIZONTAL);
+		panel.add(sep);*/
+		
 		final JLabel lblQuestion = new JLabel("<html>"+rq[0][0]+"</html>");
-		lblQuestion.setBorder(new EmptyBorder(10,10,20,0));
+		lblQuestion.setBorder(new EmptyBorder(0,10,20,0));
 		panel.add(lblQuestion);
 		
 		final JCheckBox chckbxAns = new JCheckBox("<html>"+rq[1][1]+"</html>");
@@ -90,8 +102,12 @@ public class ReviewDialog extends JDialog {
 		panel.add(chckbxAns_3);
 		
 		final JCheckBox chckbxAns_4 = new JCheckBox("<html>"+rq[5][1]+"</html>");
-		chckbxAns_4.setBorder(new EmptyBorder(0,15,10,0));
+		chckbxAns_4.setBorder(new EmptyBorder(0,15,20,0));
 		panel.add(chckbxAns_4);
+		
+		final JLabel lblExplanation = new JLabel("<html>"+rq[6][0]+"</html>");
+		lblExplanation.setBorder(new EmptyBorder(0,10,20,0));
+		panel.add(lblExplanation);
 		
 		final JButton btnValidate = new JButton("next");
 		btnValidate.addActionListener(new ActionListener(){
@@ -111,6 +127,7 @@ public class ReviewDialog extends JDialog {
 						chckbxAns_2.setText("<html>"+rq[3][1]+"</html>");
 						chckbxAns_3.setText("<html>"+rq[4][1]+"</html>");
 						chckbxAns_4.setText("<html>"+rq[5][1]+"</html>");
+						lblExplanation.setText("<html>"+rq[6][0]+"</html>");
 					}else{
 						ReviewDialog.this.dispatchEvent(new WindowEvent(ReviewDialog.this, WindowEvent.WINDOW_CLOSING));
 						/*MainWindow.gaa = new String[MainWindow.examSize][5];
@@ -132,6 +149,34 @@ public class ReviewDialog extends JDialog {
 	private String[][] FindReviewedQuestion() throws URISyntaxException, IOException{
 //		System.out.println(ReviewDialog.class.getResource("\\resource\\"+"/"+errorpaths.get(reviewed)).toURI());
 		File f = new File(ReviewDialog.class.getResource("\\resource\\"+"/"+errorpaths.get(reviewed)).toURI());
-		return Logic.ReadQuestion(f);
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		StringBuilder sb = new StringBuilder();
+		String[][] sa = new String[7][2];
+		try {
+			String line = null;
+			for(int i=0; i<6; i++){
+				line = br.readLine();
+				if(i==0){
+					sa[i][0] = line;
+					sa[i][1] = null;
+				}else{
+					sa[i][0] = line.split(",",2)[0];
+					sa[i][1] = line.split(",",2)[1];				
+				} 
+			}
+			while(line != null){
+				line = br.readLine();
+				if(line == null){break;}
+				sb.append(line);
+	            sb.append(System.lineSeparator());
+			}
+			sa[6][0] = sb.toString();
+		
+		} finally {
+        br.close();
+        //System.out.println(Arrays.deepToString(sa));
+        //System.out.println(sb.toString());
+		}
+		return sa;
 	}
 }
