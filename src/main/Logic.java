@@ -5,10 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Logic {
-	String[] Fl;
+	static String[] Fl;
+	List<Integer> chosenList = new ArrayList<Integer>();
 
 	/**Generates a list of all question files.
 	 * @throws URISyntaxException
@@ -21,11 +24,12 @@ public class Logic {
 	public File ChooseQuestion() throws URISyntaxException{
 		Random random = new Random();
 		int index = random.nextInt(Fl.length);
-		
+		chosenList.add(index);
+		MainWindow.aqa[MainWindow.questionsDone] = Fl[index];
 		return new File(Logic.class.getResource("\\resource\\"+"/"+Fl[index]).toURI());
 	}
 	
-	public String[][] ReadQuestion(File f) throws IOException{
+	public static String[][] ReadQuestion(File f) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		String[][] sa = new String[6][2];
 		try {

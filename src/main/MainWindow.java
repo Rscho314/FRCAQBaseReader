@@ -32,11 +32,14 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	final static int examSize = 5;
-	private int questionsDone = 1;
+	static int questionsDone = 0;
 	static String[][] gaa = new String[examSize][5]; //given answers array
 	static int[] raa = new int[examSize]; //registered answers array
 	static float mark;
 	static MainWindow frame;
+	String[][] qa; //questions array
+	String[] aa; //answers array
+	static String[] aqa = new String[examSize]; //asked questions array
 	/**
 	 * Launch the application.
 	 */
@@ -64,8 +67,8 @@ public class MainWindow extends JFrame {
 		final Logic L = new Logic();
 		
 		File f = L.ChooseQuestion();
-		String[][] qa = L.ReadQuestion(f); //question parts array
-		String[] aa = {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]}; //answers array
+		qa = Logic.ReadQuestion(f); //question parts array
+		aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]}; //answers array
 		//System.out.println(Arrays.deepToString(aa));
 		
 		//GUI
@@ -112,16 +115,8 @@ public class MainWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				File f;
 				try {
-					if(questionsDone < examSize){
-						f = L.ChooseQuestion();
-						String[][] qa = L.ReadQuestion(f);
-						String[] aa = {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
-						lblQuestion.setText("<html>"+qa[0][0]+"</html>");
-						chckbxAns.setText("<html>"+qa[1][1]+"</html>");
-						chckbxAns_1.setText("<html>"+qa[2][1]+"</html>");
-						chckbxAns_2.setText("<html>"+qa[3][1]+"</html>");
-						chckbxAns_3.setText("<html>"+qa[4][1]+"</html>");
-						chckbxAns_4.setText("<html>"+qa[5][1]+"</html>");
+					
+						
 						
 						if(chckbxAns.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][0] = "false";}
 						if(chckbxAns_1.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][1] = "false";}
@@ -130,17 +125,29 @@ public class MainWindow extends JFrame {
 						if(chckbxAns_4.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][4] = "false";}
 						
 						if(gaa[questionsDone] == aa){raa[questionsDone] = 1;}else{raa[questionsDone] = 0;}
-						
 						questionsDone = ++questionsDone;
-					}else{
-						//System.out.println(Arrays.toString(raa));
-						for (int i : raa)
-						    mark += i;
-						mark = mark*100/examSize; // exam mark in percents
-						MainWindow.this.setVisible(false); //hide the questions window
-						ReviewDialog rd = new ReviewDialog();
-						rd.setVisible(true);
-					}
+						if(questionsDone < examSize){
+							f = L.ChooseQuestion();
+							qa = Logic.ReadQuestion(f);
+							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
+						
+							lblQuestion.setText("<html>"+qa[0][0]+"</html>");
+							chckbxAns.setText("<html>"+qa[1][1]+"</html>");
+							chckbxAns_1.setText("<html>"+qa[2][1]+"</html>");
+							chckbxAns_2.setText("<html>"+qa[3][1]+"</html>");
+							chckbxAns_3.setText("<html>"+qa[4][1]+"</html>");
+							chckbxAns_4.setText("<html>"+qa[5][1]+"</html>");
+						
+						
+						}else{
+							//System.out.println(Arrays.toString(raa));
+							for (int i : raa)
+								mark += i;
+							mark = mark*100/examSize; // exam mark in percents
+							MainWindow.this.setVisible(false); //hide the questions window
+							MarkDialog md = new MarkDialog();
+							md.setVisible(true);
+						}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
