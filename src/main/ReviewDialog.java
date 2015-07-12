@@ -47,22 +47,27 @@ public class ReviewDialog extends JDialog {
 	            ReviewDialog.this.dispose();
 	        }
 		});
-		for (int i = 0; i < MainWindow.raaCopy.length; i++) {
-			  if (MainWindow.raaCopy[i] == 0) {
-			    errorIndices.add(i);
-			  }
+		for(int i = 0; i < MainWindow.raaCopy.length; i++){
+		    for(int j = 0; j < MainWindow.raaCopy[i].length; j++){
+		    	if (MainWindow.raaCopy[i][j] == 0) {
+		    		if(!errorIndices.contains(i)){
+		    			errorIndices.add(i);
+		    		}
+				  }
+		    }
 		}
 		
 		for (int i=0; i<errorIndices.size(); i++){
+			//System.out.println(i + MainWindow.aqaCopy[i] + Arrays.toString(MainWindow.aqaCopy) + errorIndices);
 			errorpaths.add(MainWindow.aqaCopy[i]);
 		}
 		String[][] rq = FindReviewedQuestion();
-		System.out.println(Arrays.toString(errorIndices.toArray()));
-		System.out.println(Arrays.toString(errorpaths.toArray()));
-		System.out.println(Arrays.toString(MainWindow.aqaCopy));
-		System.out.println(Arrays.toString(MainWindow.raaCopy));
-		System.out.println(Arrays.deepToString(MainWindow.gaaCopy));
-		System.out.println(Arrays.deepToString(rq));
+//		System.out.println(Arrays.toString(errorIndices.toArray()));
+//		System.out.println(Arrays.toString(errorpaths.toArray()));
+//		System.out.println(Arrays.toString(MainWindow.aqaCopy));
+//		System.out.println(Arrays.toString(MainWindow.raaCopy));
+//		System.out.println(Arrays.deepToString(MainWindow.gaaCopy));
+//		System.out.println(Arrays.deepToString(rq));
 		
 		
 		JPanel contentPane = new JPanel();
@@ -87,12 +92,12 @@ public class ReviewDialog extends JDialog {
 		
 		final JCheckBox chckbxAns = new JCheckBox();
 		chckbxAns.setBorder(new EmptyBorder(0,15,10,0));
-		if(MainWindow.gaaCopy[0][0]=="true"){
+		if(MainWindow.gaaCopy[0][0]==true){
 			chckbxAns.setSelected(true);
 		}else{
 			chckbxAns.setSelected(false);
 		}
-		if(MainWindow.gaaCopy[0][0]==rq[1][0]){
+		if(MainWindow.gaaCopy[0][0]==Boolean.valueOf(rq[1][0])){
 			chckbxAns.setText("<html><font color='green'>"+rq[1][1]+"</font></html>");
 		}else{
 			chckbxAns.setText("<html><font color='red'>"+rq[1][1]+"</font></html>");
@@ -101,12 +106,12 @@ public class ReviewDialog extends JDialog {
 		
 		final JCheckBox chckbxAns_1 = new JCheckBox();
 		chckbxAns_1.setBorder(new EmptyBorder(0,15,10,0));
-		if(MainWindow.gaaCopy[0][1]=="true"){
+		if(MainWindow.gaaCopy[0][1]==true){
 			chckbxAns_1.setSelected(true);
 		}else{
 			chckbxAns_1.setSelected(false);
 		}
-		if(MainWindow.gaaCopy[0][1]==rq[2][0]){
+		if(MainWindow.gaaCopy[0][1]==Boolean.valueOf(rq[2][0])){
 			chckbxAns_1.setText("<html><font color='green'>"+rq[2][1]+"</font></html>");
 		}else{
 			chckbxAns_1.setText("<html><font color='red'>"+rq[2][1]+"</font></html>");
@@ -115,12 +120,12 @@ public class ReviewDialog extends JDialog {
 		
 		final JCheckBox chckbxAns_2 = new JCheckBox();
 		chckbxAns_2.setBorder(new EmptyBorder(0,15,10,0));
-		if(MainWindow.gaaCopy[0][2]=="true"){
+		if(MainWindow.gaaCopy[0][2]==true){
 			chckbxAns_2.setSelected(true);
 		}else{
 			chckbxAns_2.setSelected(false);
 		}
-		if(MainWindow.gaaCopy[0][2]==rq[3][0]){
+		if(MainWindow.gaaCopy[0][2]==Boolean.valueOf(rq[3][0])){
 			chckbxAns_2.setText("<html><font color='green'>"+rq[3][1]+"</font></html>");
 		}else{
 			chckbxAns_2.setText("<html><font color='red'>"+rq[3][1]+"</font></html>");
@@ -129,12 +134,12 @@ public class ReviewDialog extends JDialog {
 		
 		final JCheckBox chckbxAns_3 = new JCheckBox();
 		chckbxAns_3.setBorder(new EmptyBorder(0,15,10,0));
-		if(MainWindow.gaaCopy[0][3]=="true"){
+		if(MainWindow.gaaCopy[0][3]==true){
 			chckbxAns_3.setSelected(true);
 		}else{
 			chckbxAns_3.setSelected(false);
 		}
-		if(MainWindow.gaaCopy[0][3]==rq[4][0]){
+		if(MainWindow.gaaCopy[0][3]==Boolean.valueOf(rq[4][0])){
 			chckbxAns_3.setText("<html><font color='green'>"+rq[4][1]+"</font></html>");
 		}else{
 			chckbxAns_3.setText("<html><font color='red'>"+rq[4][1]+"</font></html>");
@@ -143,12 +148,12 @@ public class ReviewDialog extends JDialog {
 		
 		final JCheckBox chckbxAns_4 = new JCheckBox();
 		chckbxAns_4.setBorder(new EmptyBorder(0,15,20,0));
-		if(MainWindow.gaaCopy[0][4]=="true"){
+		if(MainWindow.gaaCopy[0][4]==true){
 			chckbxAns_4.setSelected(true);
 		}else{
 			chckbxAns_4.setSelected(false);
 		}
-		if(MainWindow.gaaCopy[0][4]==rq[5][0]){
+		if(MainWindow.gaaCopy[0][4]==Boolean.valueOf(rq[5][0])){
 			chckbxAns_4.setText("<html><font color='green'>"+rq[5][1]+"</font></html>");
 		}else{
 			chckbxAns_4.setText("<html><font color='red'>"+rq[5][1]+"</font></html>");
@@ -179,52 +184,52 @@ public class ReviewDialog extends JDialog {
 						chckbxAns_3.setText("<html>"+rq[4][1]+"</html>");
 						chckbxAns_4.setText("<html>"+rq[5][1]+"</html>");
 						
-						if(MainWindow.gaaCopy[0][0]=="true"){
+						if(MainWindow.gaaCopy[0][0]==true){
 							chckbxAns.setSelected(true);
 						}else{
 							chckbxAns.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][0]==rq[1][0]){
+						if(MainWindow.gaaCopy[0][0]==Boolean.valueOf(rq[1][0])){
 							chckbxAns.setText("<html><font color='green'>"+rq[1][1]+"</font></html>");
 						}else{
 							chckbxAns.setText("<html><font color='red'>"+rq[1][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][1]=="true"){
+						if(MainWindow.gaaCopy[0][1]==true){
 							chckbxAns_1.setSelected(true);
 						}else{
 							chckbxAns_1.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][1]==rq[2][0]){
+						if(MainWindow.gaaCopy[0][1]==Boolean.valueOf(rq[2][0])){
 							chckbxAns_1.setText("<html><font color='green'>"+rq[2][1]+"</font></html>");
 						}else{
 							chckbxAns_1.setText("<html><font color='red'>"+rq[2][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][2]=="true"){
+						if(MainWindow.gaaCopy[0][2]==true){
 							chckbxAns_2.setSelected(true);
 						}else{
 							chckbxAns_2.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][2]==rq[3][0]){
+						if(MainWindow.gaaCopy[0][2]==Boolean.valueOf(rq[3][0])){
 							chckbxAns_2.setText("<html><font color='green'>"+rq[3][1]+"</font></html>");
 						}else{
 							chckbxAns_2.setText("<html><font color='red'>"+rq[3][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][3]=="true"){
+						if(MainWindow.gaaCopy[0][3]==true){
 							chckbxAns_3.setSelected(true);
 						}else{
 							chckbxAns_3.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][3]==rq[4][0]){
+						if(MainWindow.gaaCopy[0][3]==Boolean.valueOf(rq[4][0])){
 							chckbxAns_3.setText("<html><font color='green'>"+rq[4][1]+"</font></html>");
 						}else{
 							chckbxAns_3.setText("<html><font color='red'>"+rq[4][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][4]=="true"){
+						if(MainWindow.gaaCopy[0][4]==true){
 							chckbxAns_4.setSelected(true);
 						}else{
 							chckbxAns_4.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][4]==rq[5][0]){
+						if(MainWindow.gaaCopy[0][4]==Boolean.valueOf(rq[5][0])){
 							chckbxAns_4.setText("<html><font color='green'>"+rq[5][1]+"</font></html>");
 						}else{
 							chckbxAns_4.setText("<html><font color='red'>"+rq[5][1]+"</font></html>");

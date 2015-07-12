@@ -18,7 +18,7 @@ public class Logic {
 	 * @throws URISyntaxException
 	 */
 	public Logic() throws URISyntaxException{
-		String path = Logic.class.getResource("\\resource\\").getPath();
+		//String path = Logic.class.getResource("\\resource\\").getPath();
 		Fl = new File(Logic.class.getResource("\\resource\\").toURI()).list();
 	}
 	

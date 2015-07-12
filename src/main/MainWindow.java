@@ -34,14 +34,15 @@ public class MainWindow extends JFrame {
 	final static int examSize = 5;
 	static int questionsDone = 0;
 	static int questionsDoneCopy = 0;
-	static String[][] gaa = new String[examSize][5]; //given answers array
-	static String[][] gaaCopy = new String[examSize][5]; //given answers array
-	static int[] raa = new int[examSize]; //registered answers array
-	static int[] raaCopy = new int[examSize]; //registered answers array
+	static Boolean[][] gaa = new Boolean[examSize][5]; //given answers array
+	static Boolean[][] gaaCopy = new Boolean[examSize][5]; //given answers array
+	static int[][] raa = new int[examSize][5]; //registered answers array
+	static int[][] raaCopy = new int[examSize][5]; //registered answers array
 	static float mark;
 	static MainWindow frame;
 	String[][] qa; //questions array
 	String[] aa; //answers array
+	Boolean[] baa = new Boolean[5]; //boolean answers array
 	static String[] aqa = new String[examSize]; //asked questions array
 	static String[] aqaCopy = new String[examSize]; //asked questions array
 	/**
@@ -73,7 +74,10 @@ public class MainWindow extends JFrame {
 		File f = L.ChooseQuestion();
 		qa = Logic.ReadQuestion(f); //question parts array
 		aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]}; //answers array
-		//System.out.println(Arrays.deepToString(aa));
+		for(int i=0; i<aa.length; i++){
+			baa[i]=Boolean.valueOf(aa[i]);
+		}
+		//System.out.println(Arrays.deepToString(baa));
 		
 		//GUI
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,13 +126,25 @@ public class MainWindow extends JFrame {
 					
 						
 						
-						if(chckbxAns.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][0] = "false";}
-						if(chckbxAns_1.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][1] = "false";}
-						if(chckbxAns_2.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][2] = "false";}
-						if(chckbxAns_3.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][3] = "false";}
-						if(chckbxAns_4.isSelected()){gaa[questionsDone][0] = "true";}else{gaa[questionsDone][4] = "false";}
+						if(chckbxAns.isSelected()){gaa[questionsDone][0] = true;}else{gaa[questionsDone][0] = false;}
+						if(chckbxAns_1.isSelected()){gaa[questionsDone][1] = true;}else{gaa[questionsDone][1] = false;}
+						if(chckbxAns_2.isSelected()){gaa[questionsDone][2] = true;}else{gaa[questionsDone][2] = false;}
+						if(chckbxAns_3.isSelected()){gaa[questionsDone][3] = true;}else{gaa[questionsDone][3] = false;}
+						if(chckbxAns_4.isSelected()){gaa[questionsDone][4] = true;}else{gaa[questionsDone][4] = false;}
 						
-						if(gaa[questionsDone] == aa){raa[questionsDone] = 1;}else{raa[questionsDone] = 0;}
+						chckbxAns.setSelected(false);
+						chckbxAns_1.setSelected(false);
+						chckbxAns_2.setSelected(false);
+						chckbxAns_3.setSelected(false);
+						chckbxAns_4.setSelected(false);
+						
+						
+						for(int i=0; i<gaa[0].length; i++){
+							if(gaa[questionsDone][i] == baa[i]){raa[questionsDone][i] = 1;}else{raa[questionsDone][i] = 0;}
+							//System.out.println(aa[i] +" "+ gaa[questionsDone][i] + raa[questionsDone][i]);
+						}
+						
+						
 						questionsDone = ++questionsDone;
 						if(questionsDone < examSize){
 							if(questionsDone == examSize-1){btnValidate.setText("Finish session");}
@@ -145,10 +161,15 @@ public class MainWindow extends JFrame {
 						
 						
 						}else{
-							//System.out.println(Arrays.toString(raa));
-							for (int i : raa)
-								mark += i;
-							mark = mark*100/examSize; // exam mark in percents
+							//System.out.println(Arrays.deepToString(gaa));
+							//System.out.println(Arrays.deepToString(raa));
+							for(int i = 0; i < raa.length; i++){
+							    for(int j = 0; j < raa[i].length; j++){
+							        mark += raa[i][j];
+							    }
+							}
+							//System.out.println(mark);        
+							mark = mark*100/(examSize*aa.length); // exam mark in percents
 							MainWindow.this.setVisible(false); //hide the questions window
 							MarkDialog md = new MarkDialog();
 							md.setVisible(true);
@@ -158,13 +179,14 @@ public class MainWindow extends JFrame {
 							questionsDoneCopy = questionsDone;
 							aqaCopy = aqa;
 							
-							gaa = new String[MainWindow.examSize][5];
-							raa = new int[MainWindow.examSize];
+							gaa = new Boolean[MainWindow.examSize][5];
+							raa = new int[MainWindow.examSize][5];
 							aqa = new String[examSize]; //asked questions array
 							questionsDone = 0;
 							f = L.ChooseQuestion();
 							qa = Logic.ReadQuestion(f);
 							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
+							baa = new Boolean[5];
 						
 							lblQuestion.setText("<html>"+qa[0][0]+"</html>");
 							chckbxAns.setText("<html>"+qa[1][1]+"</html>");
@@ -172,6 +194,8 @@ public class MainWindow extends JFrame {
 							chckbxAns_2.setText("<html>"+qa[3][1]+"</html>");
 							chckbxAns_3.setText("<html>"+qa[4][1]+"</html>");
 							chckbxAns_4.setText("<html>"+qa[5][1]+"</html>");
+							
+							btnValidate.setText("Finish session");
 						}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

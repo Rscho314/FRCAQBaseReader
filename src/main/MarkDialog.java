@@ -69,18 +69,18 @@ public class MarkDialog extends JDialog {
 		panel.add(txtPanel);
 		
 		JLabel lblAppreciation = new JLabel("", SwingConstants.CENTER);
-		if(MainWindow.mark >= 0.8){
-			lblAppreciation.setText("<html>You scored <font color='green'>"+ MainWindow.mark + "%</font>!</html>");
+		if(MainWindow.mark >= 80){
+			lblAppreciation.setText("<html>You scored <font color='green' size='6'>"+ MainWindow.mark + "%</font>!</html>");
 		}else{
 			lblAppreciation.setText("<html>You scored <font color='red' size='6'>"+ MainWindow.mark + "%</font>!</html>");
 		}
 		txtPanel.add(lblAppreciation);
 		
 		JLabel lblRename = new JLabel("", SwingConstants.CENTER);
-		if(MainWindow.mark >= 0.8){
-			lblRename.setText("<html>You will likely pass a lot of gas until retirement.</html>");
+		if(MainWindow.mark >= 80){
+			lblRename.setText("<html>You will likely pass a lot of gas until retirement. Isn't that nice?</html>");
 		}else{
-			lblRename.setText("<html>Keep trying, you type A! The artificial paradise of anesthetic drugs awaits!</html>");
+			lblRename.setText("<html>Flipping burgers is also a very honourable profession, you know?</html>");
 		}
 		txtPanel.add(lblRename);
 		
