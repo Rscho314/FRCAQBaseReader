@@ -195,7 +195,7 @@ public class MainWindow extends JFrame {
 							chckbxAns_3.setText("<html>"+qa[4][1]+"</html>");
 							chckbxAns_4.setText("<html>"+qa[5][1]+"</html>");
 							
-							btnValidate.setText("Finish session");
+							btnValidate.setText("Validate");
 						}
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

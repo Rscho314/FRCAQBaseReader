@@ -184,52 +184,52 @@ public class ReviewDialog extends JDialog {
 						chckbxAns_3.setText("<html>"+rq[4][1]+"</html>");
 						chckbxAns_4.setText("<html>"+rq[5][1]+"</html>");
 						
-						if(MainWindow.gaaCopy[0][0]==true){
+						if(MainWindow.gaaCopy[reviewed][0]==true){
 							chckbxAns.setSelected(true);
 						}else{
 							chckbxAns.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][0]==Boolean.valueOf(rq[1][0])){
+						if(MainWindow.gaaCopy[reviewed][0]==Boolean.valueOf(rq[1][0])){
 							chckbxAns.setText("<html><font color='green'>"+rq[1][1]+"</font></html>");
 						}else{
 							chckbxAns.setText("<html><font color='red'>"+rq[1][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][1]==true){
+						if(MainWindow.gaaCopy[reviewed][1]==true){
 							chckbxAns_1.setSelected(true);
 						}else{
 							chckbxAns_1.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][1]==Boolean.valueOf(rq[2][0])){
+						if(MainWindow.gaaCopy[reviewed][1]==Boolean.valueOf(rq[2][0])){
 							chckbxAns_1.setText("<html><font color='green'>"+rq[2][1]+"</font></html>");
 						}else{
 							chckbxAns_1.setText("<html><font color='red'>"+rq[2][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][2]==true){
+						if(MainWindow.gaaCopy[reviewed][2]==true){
 							chckbxAns_2.setSelected(true);
 						}else{
 							chckbxAns_2.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][2]==Boolean.valueOf(rq[3][0])){
+						if(MainWindow.gaaCopy[reviewed][2]==Boolean.valueOf(rq[3][0])){
 							chckbxAns_2.setText("<html><font color='green'>"+rq[3][1]+"</font></html>");
 						}else{
 							chckbxAns_2.setText("<html><font color='red'>"+rq[3][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][3]==true){
+						if(MainWindow.gaaCopy[reviewed][3]==true){
 							chckbxAns_3.setSelected(true);
 						}else{
 							chckbxAns_3.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][3]==Boolean.valueOf(rq[4][0])){
+						if(MainWindow.gaaCopy[reviewed][3]==Boolean.valueOf(rq[4][0])){
 							chckbxAns_3.setText("<html><font color='green'>"+rq[4][1]+"</font></html>");
 						}else{
 							chckbxAns_3.setText("<html><font color='red'>"+rq[4][1]+"</font></html>");
 						}
-						if(MainWindow.gaaCopy[0][4]==true){
+						if(MainWindow.gaaCopy[reviewed][4]==true){
 							chckbxAns_4.setSelected(true);
 						}else{
 							chckbxAns_4.setSelected(false);
 						}
-						if(MainWindow.gaaCopy[0][4]==Boolean.valueOf(rq[5][0])){
+						if(MainWindow.gaaCopy[reviewed][4]==Boolean.valueOf(rq[5][0])){
 							chckbxAns_4.setText("<html><font color='green'>"+rq[5][1]+"</font></html>");
 						}else{
 							chckbxAns_4.setText("<html><font color='red'>"+rq[5][1]+"</font></html>");
