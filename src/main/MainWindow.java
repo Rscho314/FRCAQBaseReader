@@ -31,7 +31,7 @@ public class MainWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	final static int examSize = 5;
+	final static int examSize = 30;
 	static int questionsDone = 0;
 	static int questionsDoneCopy = 0;
 	static Boolean[][] gaa = new Boolean[examSize][5]; //given answers array

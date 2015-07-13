@@ -262,14 +262,23 @@ public class ReviewDialog extends JDialog {
 		try {
 			String line = null;
 			for(int i=0; i<6; i++){
-				line = br.readLine();
-				if(i==0){
-					sa[i][0] = line;
-					sa[i][1] = null;
-				}else{
+				try{
+					line = br.readLine();
+					if(i==0){
+						sa[i][0] = line;
+						sa[i][1] = null;
+					}else{
+						sa[i][0] = line.split(",",2)[0];
+						sa[i][1] = line.split(",",2)[1];				
+					}
+				}catch(Exception e){ //since line cannot be read, replaces it by next line
+					//System.out.println("Cannot read question!: "+line.length() + "; " + line);
+					line = br.readLine();
 					sa[i][0] = line.split(",",2)[0];
-					sa[i][1] = line.split(",",2)[1];				
-				} 
+					sa[i][1] = line.split(",",2)[1];
+					//System.out.println(line);
+					continue;
+				}
 			}
 			while(line != null){
 				line = br.readLine();

@@ -25,7 +25,11 @@ public class Logic {
 	public File ChooseQuestion() throws URISyntaxException{
 		Random random = new Random();
 		int index = random.nextInt(Fl.length);
-		chosenList.add(index);
+		if(!chosenList.contains(index)){
+			chosenList.add(index);
+		}else{
+			ChooseQuestion();
+		}
 		MainWindow.aqa[MainWindow.questionsDone] = Fl[index];
 		return new File(Logic.class.getResource("\\resource\\"+"/"+Fl[index]).toURI());
 	}
@@ -33,25 +37,29 @@ public class Logic {
 	public static String[][] ReadQuestion(File f) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		String[][] sa = new String[6][2];
-		try {
-			String line;
+		String line = null;
 			for(int i=0; i<6; i++){
-				line = br.readLine();
-				if(line==null){
-					
-				}else if(i==0){
-					sa[i][0] = line;
-					sa[i][1] = null;
-				}else{
+				try{
+					line = br.readLine();
+					if(line==null){						
+						throw new Exception();//handles empty lines before or inside question
+					}else if(i==0){
+						sa[i][0] = line;
+						sa[i][1] = null;
+					}else{
+						sa[i][0] = line.split(",",2)[0];
+						sa[i][1] = line.split(",",2)[1];		
+					}
+				}catch(Exception e){ //since line cannot be read, replaces it by next line
+					//System.out.println("Cannot read question!: "+line.length() + "; " + line);
+					line = br.readLine();
 					sa[i][0] = line.split(",",2)[0];
-					sa[i][1] = line.split(",",2)[1];				
-				} 
+					sa[i][1] = line.split(",",2)[1];
+					//System.out.println(line);
+					continue;
+				}	
 			}
-		//System.out.println(Arrays.deepToString(sa));
-		} finally {
-        br.close();
-		}
-		
+		br.close();
 		return sa;
 	}
 }
