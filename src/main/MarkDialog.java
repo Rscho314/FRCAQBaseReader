@@ -35,10 +35,12 @@ public class MarkDialog extends JDialog {
 
 	        @Override
 	        public void windowClosing(WindowEvent arg0) {
-	            if(review == false){ 
+	            if(review == false){
+	            	//MainWindow.mark = 0;
 	            	MainWindow.frame.setVisible(true);
 	            	MarkDialog.this.dispose();
 	            }else{
+	            	//MainWindow.mark = 0;
 	            	MarkDialog.this.dispose();
 	            	ReviewDialog rd;
 					try {

@@ -75,7 +75,12 @@ public class MainWindow extends JFrame {
 		qa = Logic.ReadQuestion(f); //question parts array
 		aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]}; //answers array
 		for(int i=0; i<aa.length; i++){
-			baa[i]=Boolean.valueOf(aa[i]);
+			if (aa[i].equalsIgnoreCase("true") || aa[i].equalsIgnoreCase("false")) {
+			    baa[i] = Boolean.valueOf(aa[i]);
+			    //System.out.println(aa[i] + " " + baa[i]);
+			} else {
+			    throw new IllegalArgumentException();
+			}
 		}
 		//System.out.println(Arrays.deepToString(baa));
 		
@@ -141,7 +146,7 @@ public class MainWindow extends JFrame {
 						
 						for(int i=0; i<gaa[0].length; i++){
 							if(gaa[questionsDone][i] == baa[i]){raa[questionsDone][i] = 1;}else{raa[questionsDone][i] = 0;}
-							//System.out.println(aa[i] +" "+ gaa[questionsDone][i] + raa[questionsDone][i]);
+							//System.out.println(aa[i] + " "+ baa[i] +" "+ gaa[questionsDone][i] + " " + raa[questionsDone][i]);
 						}
 						
 						
@@ -151,6 +156,14 @@ public class MainWindow extends JFrame {
 							f = L.ChooseQuestion();
 							qa = Logic.ReadQuestion(f);
 							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
+							for(int i=0; i<aa.length; i++){
+								if (aa[i].equalsIgnoreCase("true") || aa[i].equalsIgnoreCase("false")) {
+								    baa[i] = Boolean.valueOf(aa[i]);
+								    //System.out.println(aa[i] + " " + baa[i]);
+								} else {
+								    throw new IllegalArgumentException();
+								}
+							}
 						
 							lblQuestion.setText("<html>"+qa[0][0]+"</html>");
 							chckbxAns.setText("<html>"+qa[1][1]+"</html>");
@@ -162,13 +175,14 @@ public class MainWindow extends JFrame {
 						
 						}else{
 							//System.out.println(Arrays.deepToString(gaa));
-							//System.out.println(Arrays.deepToString(raa));
+							//System.out.println(Arrays.deepToString(baa));
+							mark = 0;
 							for(int i = 0; i < raa.length; i++){
 							    for(int j = 0; j < raa[i].length; j++){
 							        mark += raa[i][j];
 							    }
 							}
-							//System.out.println(mark);        
+							//System.out.println(mark +" "+ Arrays.deepToString(raa));        
 							mark = mark*100/(examSize*aa.length); // exam mark in percents
 							MainWindow.this.setVisible(false); //hide the questions window
 							MarkDialog md = new MarkDialog();
@@ -186,7 +200,15 @@ public class MainWindow extends JFrame {
 							f = L.ChooseQuestion();
 							qa = Logic.ReadQuestion(f);
 							aa = new String[] {qa[1][0], qa[2][0], qa[3][0], qa[4][0], qa[5][0]};
-							baa = new Boolean[5];
+							for(int i=0; i<aa.length; i++){
+								if (aa[i].equalsIgnoreCase("true") || aa[i].equalsIgnoreCase("false")) {
+								    baa[i] = Boolean.valueOf(aa[i]);
+								    //System.out.println(aa[i] + " " + baa[i]);
+								} else {
+								    throw new IllegalArgumentException();
+								}
+							}
+							//baa = new Boolean[5];
 						
 							lblQuestion.setText("<html>"+qa[0][0]+"</html>");
 							chckbxAns.setText("<html>"+qa[1][1]+"</html>");
