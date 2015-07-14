@@ -255,7 +255,7 @@ public class ReviewDialog extends JDialog {
 	
 	private String[][] FindReviewedQuestion() throws URISyntaxException, IOException{
 //		System.out.println(ReviewDialog.class.getResource("\\resource\\"+"/"+errorpaths.get(reviewed)).toURI());
-		File f = new File(ReviewDialog.class.getResource("\\resource\\"+"/"+errorpaths.get(reviewed)).toURI());
+		File f = new File(ReviewDialog.class.getResource("resource"+"/"+errorpaths.get(reviewed)).toURI());
 		BufferedReader br = new BufferedReader(new FileReader(f));
 		StringBuilder sb = new StringBuilder();
 		String[][] sa = new String[7][2];

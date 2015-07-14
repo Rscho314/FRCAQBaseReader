@@ -18,8 +18,8 @@ public class Logic {
 	 * @throws URISyntaxException
 	 */
 	public Logic() throws URISyntaxException{
-		//String path = Logic.class.getResource("\\resource\\").getPath();
-		Fl = new File(Logic.class.getResource("\\resource\\").toURI()).list();
+		//Fl = new File(Logic.class.getResource("\\resource\\").toURI()).list();
+		Fl = new File(Logic.class.getResource("resource/").toURI()).list();
 	}
 	
 	public File ChooseQuestion() throws URISyntaxException{
@@ -31,7 +31,7 @@ public class Logic {
 			ChooseQuestion();
 		}
 		MainWindow.aqa[MainWindow.questionsDone] = Fl[index];
-		return new File(Logic.class.getResource("\\resource\\"+"/"+Fl[index]).toURI());
+		return new File(Logic.class.getResource("resource"+"/"+Fl[index]).toURI());
 	}
 	
 	public static String[][] ReadQuestion(File f) throws IOException{
